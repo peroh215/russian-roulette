@@ -1,0 +1,4 @@
+﻿  Game.cpp
+c:\users\valen\source\repos\russianroulette\russianroulette\game.cpp(22): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+c:\users\valen\source\repos\russianroulette\russianroulette\game.cpp(18): warning C4101: 'triggerPresses': variável local não referenciada
+  RussianRoulette.vcxproj -> C:\Users\Valen\source\repos\RussianRoulette\Debug\RussianRoulette.exe
