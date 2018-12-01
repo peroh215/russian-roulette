@@ -1,5 +1,4 @@
 #include <Windows.h>
-#include <time.h>
 #include "russianroulette.h"
 
 void printStats(int bullet_loc, int turn_num) {
@@ -7,7 +6,7 @@ void printStats(int bullet_loc, int turn_num) {
 }
 
 int roll() {
-	return rand() % CHAMBER_SIZE() + 1;
+	return rand() % CHAMBER_SIZE + 1;
 }
 
 void game() {
@@ -16,7 +15,7 @@ void game() {
 	unsigned int bulletLocation = roll();
 	short int playerChoice;
 	int triggerPresses;
-	cout << "\n=== GAME STARTS ===\nThe chamber is rolled and the gun is given to the player\n";
+	cout << "\n=== GAME STARTS ===\nThe chamber is rolled and the gun is given to the player\nThe gun has " << CHAMBER_SIZE << " chambers\n\n";
 
 	while (gameOver == false) {
 		srand(time(NULL));
