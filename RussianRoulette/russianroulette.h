@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-inline int CHAMBER_SIZE(int _SIZE=7) { int CS = _SIZE - 1; return CS; }
+extern int CHAMBER_SIZE;
 void game();
 void options();
 #endif
