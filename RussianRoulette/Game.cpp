@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <time.h>
 #include "russianroulette.h"
 
 void printStats(int bullet_loc, int turn_num) {
