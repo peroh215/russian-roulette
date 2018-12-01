@@ -22,7 +22,6 @@ void game() {
 		srand(time(NULL));
 		if ((turn % 2) == 0) {
 			// Player's turn
-			cout << bulletLocation;
 			cout << "\n[1] Pull the trigger | [2] Give up\n> ";
 			cin >> playerChoice;
 			if (playerChoice == 1) { ; }
