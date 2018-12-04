@@ -20,7 +20,7 @@ void createCustomGamemode() {
 
 void setGamemode() {
 	short int choice;
-	cout << "\nChoose a gamemode:\n[1] Classic | [2] 50/50 | [3] 4 players | [4] Custom\n\n> ";
+	cout << "\nChoose a gamemode:\n[1] Classic | [2] 50/50 | [3] 4 players | [4] Battle royale | [5] Custom\n\n> ";
 	cin >> choice;
 
 	if (choice == 1) {
@@ -42,6 +42,12 @@ void setGamemode() {
 		CHAMBER_SIZE = 7 - 1;
 	}
 	else if (choice == 4) {
+		// Battle royale (100 players)
+		gamemode = "Battle royale";
+		PLAYER_AMNT = 100;
+		CHAMBER_SIZE = 11 - 1;
+	}
+	else if (choice == 5) {
 		// Custom gamemode
 		gamemode = "Custom";
 		createCustomGamemode();
@@ -121,6 +127,8 @@ void game() {
 			}
 		}
 
+		playerAmount -= deadPlayers;
+
 		if (deadPlayers != 0) {
 			cout << deadPlayers << " player(s) die(s)\nNow there are only " << playerAmount << " player(s) left\n";
 		}
@@ -128,7 +136,6 @@ void game() {
 			cout << "But no one dies\n";
 		}
 
-		playerAmount -= deadPlayers;
 		deadPlayers = 0;
 		turn++;
 		Sleep(500);
