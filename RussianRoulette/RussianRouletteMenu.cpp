@@ -3,19 +3,15 @@
 using namespace std;
 
 bool running = true;
-static std::string help = "\n[1] Play game\n[2] Options\n[3] Help\n[4] Exit";
+static std::string help = "\n[1] Play game\n[2] Help\n[3] Exit";
 
 void checkInput(int inp) {
 	if (inp == 1) { 
 		game(); // Start game
 		cout << help;
 	}
-	else if (inp == 2) {
-		options(); // Options
-		cout << help;
-	}
-	else if (inp == 3) cout << help; // Help
-	else if (inp == 4) exit(0); // Exit
+	else if (inp == 2) cout << help; // Help
+	else if (inp == 3) exit(0); // Exit
 	else cout << "\nInvalid choice\n";
 }
 
@@ -28,5 +24,5 @@ int main() {
 		cin >> choice;
 		checkInput(choice);
 	}
-	system("pause");
+	return 0;
 }
