@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <time.h>
 #include <string>
+#include <stdexcept>
 #include "russianroulette.h"
 
 int PLAYER_AMNT; // Player amount
@@ -12,10 +13,24 @@ void createCustomGamemode() {
 	int chamber_size;
 	cout << "\n=== GAMEMODE CREATION ===\nPlayer amount: ";
 	cin >> player_amount;
-	cout << "Chamber size: ";
-	cin >> chamber_size;
+	try {
+		if (player_amount > 1) { ; } // Checks if player inputted a valid player amount
+		else { throw std::invalid_argument("ERROR: Invalid player amount (player amount needs to be greater than 1)"); }
+		cout << "Chamber size: ";
+		cin >> chamber_size;
+		if (chamber_size > 0) { ; } // Checks if player inputted a valid chamber size
+		else { throw std::invalid_argument("ERROR: Invalid chamber size (chamber size needs to be greater than 0"); }
+	}
+	catch (std::invalid_argument) {
+		cout << "\nERROR\n";
+		createCustomGamemode();
+		return;
+	}
 	::PLAYER_AMNT = player_amount;
 	::CHAMBER_SIZE = chamber_size;
+	player_amount = NULL;
+	chamber_size = NULL;
+	return;
 }
 
 void setGamemode() {
@@ -59,7 +74,7 @@ void setGamemode() {
 }
 
 void printStats(int bullet_loc, int turn_num) {
-	cout << "\n----- STATS -----\n" << "Bullet was in chamber " << bullet_loc << endl << "It took " << turn_num << " turns until the gun shot\n";
+	cout << "\n\n----- STATS -----\n" << "Bullet was in chamber " << bullet_loc << endl << "It took " << turn_num << " turns until the gun shot\n";
 }
 
 int roll() {
@@ -70,10 +85,10 @@ void game() {
 
 	setGamemode();
 
-	bool gameOver = false;
+	bool gameOver = false; // Ends game if true
 	int turn = 0;
-	short int playerChoice;
-	int deadPlayers = 0;
+	short int playerChoice; // Player input
+	int deadPlayers = 0; // How many players died in last turn
 	int playerAmount = ::PLAYER_AMNT; // Variable used to print player amount (Player amount - user)
 	playerAmount--;
 
@@ -93,8 +108,9 @@ void game() {
 
 			cout << "\nPlayer pulls the trigger...\n";
 			if (roll() == bulletLocation) {
-				// Gun shoots
+				// Gun shoots (AI wins)
 				cout << "The gun shoots and player dies, AI wins\n\n";
+				::GAMES_LOST++;
 				printStats(bulletLocation, turn);
 				gameOver = true;
 			}
@@ -109,15 +125,15 @@ void game() {
 			for (int i = 1; i <= playerAmount; ++i) {
 				if (roll() == bulletLocation) {
 					// Gun shoots
+					PLAYER_AMNT--;
+					deadPlayers++;
 					if ((playerAmount - 1) <= 0) {
-						// Ends game if there is one player left
+						// Ends game if there is one player left (Player wins)
+						cout << deadPlayers << "player(s) die";
+						cout << "\nThere's no AI left, player wins";
+						::GAMES_WON++;
 						printStats(bulletLocation, turn);
 						gameOver = true;
-					}
-					else {
-						// Continues game if there is more than 1 player alive
-						PLAYER_AMNT--;
-						deadPlayers++;
 					}
 				}
 				else {
@@ -130,7 +146,7 @@ void game() {
 		playerAmount -= deadPlayers;
 
 		if (deadPlayers != 0) {
-			cout << deadPlayers << " player(s) die(s)\nNow there are only " << playerAmount << " player(s) left\n";
+			cout << deadPlayers << " player(s) die\nNow there are only " << playerAmount << " player(s) left\n";
 		}
 		else if (deadPlayers == 0 && (turn % 2) == 1 && gameOver == false) {
 			cout << "But no one dies\n";
