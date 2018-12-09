@@ -12,6 +12,7 @@ void game();
 // Scoreboard
 extern int GAMES_WON;
 extern int GAMES_LOST;
-void saveScore();
+void saveScore(char name[30], int gamesWon, int gamesLost);
 void loadScore();
+void askScore();
 #endif
