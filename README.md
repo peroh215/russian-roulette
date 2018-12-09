@@ -4,6 +4,7 @@ Russian roulette game coded in C++
 ![Game screenshot](/images/roulette.PNG)
 
 - Gamemodes + custom gamemode creation
-- Infinite multiple players
-- Customizable chamber size/chance of shooting
-- Scoreboards coming soon...
+- Infinite AI amount
+- Customizable chamber size / chances
+- Scoreboards
+- Local multiplayer
